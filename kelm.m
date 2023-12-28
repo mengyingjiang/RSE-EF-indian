@@ -4,24 +4,24 @@ load Indian_gt
 [nr,nc,dim]=size(image);
 nall=nr*nc;
 n_class = max(GT(:));
-%% ¹éÒ»»¯ 
+%% å½’ä¸€åŒ– 
 data=reshape(image,nall,dim)./max(image(:));
 image=image./max(image(:));
-%%  ³¬²ÎÊıÉèÖÃ
+%%  è¶…å‚æ•°è®¾ç½®
 C=[10^0 10^1 10^2 10^3 10^4 10^5];
 sigma=[2^(-4),2^(-3),2^(-2),2^(-1),2^(0),2^(1),2^(2),2^(3),2^(4)];
-nadd=10;
+nadd=20;
 wid=5;
 n_times = 10;
-%% ¸ø·ÖÀà½á¹ûÔ¤Áô¿Õ¼ä
+%% ç»™åˆ†ç±»ç»“æœé¢„ç•™ç©ºé—´
 OA1=zeros(n_times,1);
 kappa1=zeros(n_times ,1);
 AA1=zeros(n_times ,1);
 CA1=zeros(n_class,10);
 %%
-dim_sub=90;% ×Ó¿Õ¼äÎ¬Êı
+dim_sub=90;% å­ç©ºé—´ç»´æ•°
 dim_MNF=20;
-N_sub=6; %×Ó¿Õ¼ä¸öÊı
+N_sub=6; %å­ç©ºé—´ä¸ªæ•°
 window=9; %9 for indian ,7 for Houston 
 sigmapca=0.5; % 0.0625 for dataspec; 0.5 for data
 dim_Gauss=50;
@@ -29,8 +29,8 @@ new_fea=creat_enh_fea(image,dim,dim_sub,dim_MNF,N_sub,window,sigmapca,dim_Gauss)
 [~,~,N] = size(new_fea);
 
 for j=1:n_times 
-    [images, YTrn, indexs] = loadtrain1(image,GT,0.05);                            %µÃµ½ÑµÁ·Ñù±¾
-    [testImages, testLabels, testIndexs,tempimg,maxmum] = loadtest(image,GT,indexs);          %µÃµ½²âÊÔÑù±¾
+    [images, YTrn, indexs] = loadtrain1(image,GT,0.05);                            %å¾—åˆ°è®­ç»ƒæ ·æœ¬
+    [testImages, testLabels, testIndexs,tempimg,maxmum] = loadtest(image,GT,indexs);          %å¾—åˆ°æµ‹è¯•æ ·æœ¬
     [ YTrn, indexs,labelsss,indebbb,indeaaa]=anns(YTrn',indexs,GT,data,nadd,wid,0.3);
     p1 = zeros(n_class,length(testLabels),N);
     for k=1:N       
